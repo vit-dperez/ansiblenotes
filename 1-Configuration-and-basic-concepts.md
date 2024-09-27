@@ -40,3 +40,5 @@ gathering       = implicit
 timeout         = 10
 forks           = 5
 ```
+
+Ansible will look for the first for the environment variable `ANSIBLE_CONFIG`
