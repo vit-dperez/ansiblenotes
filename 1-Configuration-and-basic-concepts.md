@@ -41,4 +41,29 @@ timeout         = 10
 forks           = 5
 ```
 
-Ansible will look for the first for the environment variable `ANSIBLE_CONFIG`
+## Ansible Configuration Variables
+
+- Ansible will look first for the environment variable `ANSIBLE_CONFIG` to look for the configurations followed by the ansible.cfg file in the current directory from which the Ansible playbooks are run followed by the .ansible.cfg in the user's home directory and lastly the default Ansible config file.
+
+- If we need to change only one variable in one of the other files we can change it as an environment variable, right before we run the ansible playbook set it as: `ANSIBLE_VARNAME`.
+
+```
+Single run:
+$ ANSIBLE_GATHERING=explicit ansible-playbook playbook.yml
+
+Until exit shell
+$ export ANSIBLE_GATHERING=explicit
+$ ansible-playbook playbook.yml
+
+Long-live change
+Create a Ansible config file in the Playbooks directory and update the parameter in it.
+
+/opt/web-playbooks/ansible.cfg
+gathering     = explicit
+```
+
+## View Configuration
+
+```
+$ ansible-config list
+```
