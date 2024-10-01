@@ -47,23 +47,88 @@ forks           = 5
 
 - If we need to change only one variable in one of the other files we can change it as an environment variable, right before we run the ansible playbook set it as: `ANSIBLE_VARNAME`.
 
-```
+
 Single run:
-$ ANSIBLE_GATHERING=explicit ansible-playbook playbook.yml
+```
+ANSIBLE_GATHERING=explicit ansible-playbook playbook.yml
+```
 
 Until exit shell
-$ export ANSIBLE_GATHERING=explicit
-$ ansible-playbook playbook.yml
+```
+export ANSIBLE_GATHERING=explicit
+```
+```
+ansible-playbook playbook.yml
+```
 
 Long-live change
 Create a Ansible config file in the Playbooks directory and update the parameter in it.
 
 /opt/web-playbooks/ansible.cfg
+```
 gathering     = explicit
 ```
 
 ## View Configuration
 
+
+- List all configurations
 ```
-$ ansible-config list
+ansible-config list
+```
+
+- Shows the current config gile
+```
+ansible-config view
+```
+
+- Shows the current (comprehensive list) settings
+```
+ansible-config dump
+```
+
+## What is YAML?
+
+- A YAML file is used to represent data
+
+```
+Servers:
+  - name: Server1
+    owner: John
+    created: 12232012
+    status: active
+```
+
+- Key Value Pair
+```
+Fruit: Apple
+Vegetable: Carrot
+Liquid: Water
+Meat: Chicken
+```
+
+- Array/Lists
+```
+Fruits:
+- Orange
+- Apple
+- Banana
+
+Vegetables:
+- Carrot
+- Cauliflower
+- Tomato
+```
+
+- Dictionary/Map
+```
+Banana:
+  Calories: 105
+  Fat: 0.4 g
+  Carbs: 27 g
+
+Grapes:
+  Calories: 62
+  Fat: 0.3 g
+  Carbs: 16 g
 ```
