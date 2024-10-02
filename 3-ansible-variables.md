@@ -173,6 +173,79 @@ user:
 ansible-playbook -i inventory playbook.yml -v
 ```
 
+## Variable Scopes
 
+- A scope defines the accesability or the visibility of a variable.
 
+- A variable is accessible depending on how and where it is defined.
 
+## Variable Scopes - Host
+
+- The fist scope is the `hosts scope`.
+
+```
+web1 ansible_host=172.20.1.100
+web2 ansible_host=172.20.1.101 dns_server=10.5.5.4
+web3 ansible_host=172.20.1.102
+```
+
+## Variable Scopes - Play
+
+```
+---
+- name: Play1
+  hosts: web1
+  vars:
+    ntp_server: 10.1.1.1
+  tasks:
+  - debug:
+      var: ntp_server
+- name: Play2
+  hosts: web1
+  tasks:
+  - debug:
+      var: ntp_server
+```
+
+## Variable Scopes - Global
+
+- Passing variables in the command line makes it available thoughout the playbook execution.
+
+```
+ansible-playbook playbook.yml --extra-vars "ntp_server=10.1.1.1"
+```
+
+## Magic Variables
+
+- Sometimes we need to access a `host` variable that is only defined in one of the hosts.
+
+- There's where Magic variables come handy.
+
+```
+web1 ansible_host=172.20.1.100
+web2 ansible_host=172.20.1.101 dns_server=10.5.5.4
+web3 ansible_host=172.20.1.102
+```
+
+**Get the variables from the `web2` host**
+
+```
+---
+- name: Print dns server
+  hosts: all
+  tasks:
+  - debug:
+      msg: '{{ hostvars['web2'].dns_server }}'
+```
+
+```
+msg: '{{ hostvars['web2'].ansible_host }}'
+```
+
+```
+msg: '{{ hostvars['web2'].ansible_facts.architecture }}'
+```
+
+```
+msg: '{{ hostvars['web2'].ansible_facts.devices }}'
+```
