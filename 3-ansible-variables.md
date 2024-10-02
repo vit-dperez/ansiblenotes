@@ -99,7 +99,7 @@ inter_ip_range: 192.0.2.0
 | Valid values | Description |
 |-------------:|:------------|
 | True, 'true', 't', 'yes', 'y', 'on', '1', 1, 1.0 | Truthy values |
-| False, 'false', 'f', 'no', 'n', 'off', '0', 0,0.0 |
+| False, 'false', 'f', 'no', 'n', 'off', '0', 0,0.0 | False values |
 
 ## List Variables
 
@@ -129,3 +129,4 @@ user:
   name: "admin"
   password: "secret"
 ```
+
