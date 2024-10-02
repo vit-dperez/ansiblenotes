@@ -1,6 +1,6 @@
 # Ansible Variables
 
-# Variable
+## Variables
 
 - Stores information that varies with each host
 
@@ -71,3 +71,61 @@ inter_ip_range: 192.0.2.0
 
 - When using variables with Jinja2 Templating enclose them within quotes if its in the begining of a sentence, else would not be required.
 
+## String Variables
+
+- String variables in Ansible are sequences of characters.
+
+- They can be defined in a playbook, inventory, or passed as command line arguments.
+
+`username: "admin"`
+
+## Number Variables
+
+- Number variables in Ansible can hold integer or floating-point values.
+
+- They can be used in mathematical operations.
+
+`max_connections: 100`
+
+## Boolean Variables
+
+- Boolean variables in Ansible can hold either true or false.
+
+- They are often used in conditional statements.
+
+
+`debug_mode: true`
+
+| Valid values | Description |
+|-------------:|:------------|
+| True, 'true', 't', 'yes', 'y', 'on', '1', 1, 1.0 | Truthy values |
+| False, 'false', 'f', 'no', 'n', 'off', '0', 0,0.0 |
+
+## List Variables
+
+- List variables in Ansible can hold an ordered collection of values.
+
+- The values can be of any type.
+
+```
+packages:
+  - nginx
+  - postgresql
+  - git
+```
+
+- Use double quotes to specify them on the playbooks.
+
+- To select an item from the list do: `{{ packages[0] }}`
+
+## Dictionary Variables
+
+- Dictionary variables in Ansible can hold a collection of key-value pairs.
+
+- The keys and values can be of any type.
+
+```
+user:
+  name: "admin"
+  password: "secret"
+```
