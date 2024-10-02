@@ -130,3 +130,49 @@ user:
   password: "secret"
 ```
 
+
+## Variable Precedence
+
+- When Ansible Playbook runs it first associates the group variables and then associates the host variables.
+
+- The variable at the host level takes precedence over the variable defined in the group variable.
+
+- Whatever is defined in the play level overrides the host and group variables.
+
+- If the variable is passed in the command line it takes that varibale.
+
+- If we want to pass the output of a command to another command we can use the `register` directive in the playbook and specify the variable on the second command with the same name.
+
+```
+---
+- name: Check /etc/hosts file
+  hosts: all
+  tasks:
+  - shell: cat /etc/hosts
+    register: result
+
+  - debug:
+      var: result
+
+- name: Play2
+  hosts: all
+  tasks:
+  - debug:
+      var: result.stdout
+```
+
+
+- We can also get the output of a command using the `-v` option in the command-line.
+```
+- name: Check /etc/hosts file
+  hosts: all
+  tasks:
+  - shell: cat /etc/hosts
+```
+```
+ansible-playbook -i inventory playbook.yml -v
+```
+
+
+
+
