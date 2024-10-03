@@ -25,6 +25,19 @@ web2 ansible_host=server4.company.com ansible_connection=winrm
       line: 'nameserver {{ dns_server }};
 ```
 
+```
+---
+- hosts: localhost
+  vars:
+    car_model: 'BMW M3'
+    country_name: USA
+    title: 'Systems Engineer'
+  tasks:
+    - command: 'echo "My car is {{ car_model }}"'
+    - command: 'echo "I live in the {{ country_name }}"'
+    - command: 'echo "I work as a {{ title }}"'
+```
+
 - We can also have variables defined in a seperate file dedicated for variables.
 
 ```
@@ -114,7 +127,7 @@ packages:
   - git
 ```
 
-- Use double quotes to specify them on the playbooks.
+- Use double quotes to specify them on the playbooks `"{{ packages }}"`.
 
 - To select an item from the list do: `{{ packages[0] }}`
 
@@ -124,11 +137,13 @@ packages:
 
 - The keys and values can be of any type.
 
+
 ```
 user:
   name: "admin"
   password: "secret"
 ```
+- Example: `msg: "Username:{{ user.name }}" Password: {{ user.password }}`
 
 
 ## Variable Precedence
@@ -249,3 +264,47 @@ msg: '{{ hostvars['web2'].ansible_facts.architecture }}'
 ```
 msg: '{{ hostvars['web2'].ansible_facts.devices }}'
 ```
+
+## Ansible Facts
+
+- When ansible runs a playbook it collects information from the hosts (like ips, configurations, settings), these information are known as `facts` in Ansible.
+
+- The `setup` module that runs automatically by Ansible.
+
+- The `facts task` runs without being specified before the tasks defined in the playbook.
+
+- This information is stored in a variable `ansible_facts`.
+
+```
+---
+- name: Print hello message
+  hosts: all
+  tasks:
+  - debug:
+      var: ansible_facts
+```
+
+**If we want to skip the fact's gathering**
+```
+---
+- name: Print hello message
+  hosts: all
+  gather_facts: no
+  tasks:
+  - debug:
+      var: ansible_facts
+```
+
+- The gathering option can be configured in `/etc/ansible/ansible.cfg`:
+
+```
+# plays will gather facts by default, which contain information about
+# smart - gather by default, but don't regather if already gathered
+# implicit - gather by default, turn off with gather_facts: False
+# explicit - do not gather by default, must say gather_facts: True
+gathering       = implicit
+```
+
+- Ansible only gathers facts against hosts that are part of the playbook.
+
+
