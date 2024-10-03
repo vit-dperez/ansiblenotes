@@ -140,3 +140,18 @@ ansible-playbook configure_nginx.yml --check --diff
 ```
 ansible-playbook configure_nginx.yml --syntax-check
 ```
+
+## Ansible-Lnit
+
+- It is a way to ensure consistency and quality across al the playbooks.
+
+- Is a command-line tool that performs linting on Ansible playbooks, roles, and collections.
+
+- It check the code for potential errors, bugs, stylistic erros, ans suspicious constructs.
+
+- It's akin to having a seasoned Ansible mentor guiding you, providing valuable insights, and catching issues that might have slipped past the notice.
+
+### How to use ansible-lint?
+```
+ansible-lint <playbook.yml>
+```
