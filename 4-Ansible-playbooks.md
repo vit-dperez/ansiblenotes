@@ -223,4 +223,98 @@ ansible-lint <playbook.yml>
         body: Httpd Service is down
         when: result.stdout.find('down') != -1
 ```
+```
+---
+-  name: 'Execute a script on all web server nodes'
+   hosts: all
+   become: yes
+   tasks:
+     -  service: 'name=nginx state=started'
+        when: 'ansible_host=="node02"'
+```
+```
+node01 ansible_host=node01 ansible_ssh_pass=caleston123
+node02 ansible_host=node02 ansible_ssh_pass=caleston123
+[web_nodes]
+node01
+node02
+```
+
+## Loops
+
+- It is usefull when we to execute a task multiple times and not repeating code.
+
+### Lists
+
+```
+-
+  name: Create users
+  hosts: localhost
+  tasks:
+    - user: name='{{ item }}'  state=present
+      loop:
+        - joe
+        - george
+        - ravi
+        - mani
+        - kiran
+        - jazlan
+        - emaan
+        - mazin
+        - izaan
+        - mike
+        - menaal
+        - shoeb
+        - rani
+```
+
+
+### Dictionaries
+
+```
+-
+  name: Create users
+  hosts: localhost
+  tasks:
+    - user: name='{{ item.name }}'  state=present  uid= '{{ item.uid }}'
+      loop:
+        - name: joe
+          uid: 1010
+        - name: george
+          uid: 1011
+        - name: ravi
+          uid: 1012
+        - name: mani
+          uid: 1013
+        - name: kiran
+          uid: 1014
+        - name: jazlan
+          uid: 1015
+        - name: emaan
+          uid: 1016
+        - name: mazin
+          uid: 1017
+        - name: izaan
+          uid: 1018
+        - name: mike
+          uid: 1019
+        - name: menaal
+          uid 1020
+        - name: shoeb
+          uid: 1021
+        - name: rani
+          uid: 1022
+```
+
+### With_
+
+- There are other directives (like `loop`) that start `with_` and they help iterate over a list of different elements like:
+  - items
+  - files
+  - urls
+  - dbs
+  - k8s
+  - password
+  - template
+  - etc
 
