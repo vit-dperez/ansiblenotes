@@ -126,3 +126,23 @@ nameserver 10.1.250.2
         line: 'nameserver 10.1.250.10'
 ```
 
+## Ansible Plugins
+
+- Although Ansible has a lot of built-in modules and functionality we sometimes need to rely on some extra functionality that can dynamically fetch real-time information about cloud resources, such as instances, security groups or tags, directly from the cloud provider's API to ensure the inventory remains up to date and reflects the current state of the infrastructure.
+
+- To address this challenges we can leverage `Ansible plugins`, wich provide extensibility and customization options beyond the core Ansible features.
+
+- A piece of code that modifies the functionality of Ansible.
+
+- Enhance various aspects of Ansible:
+  - Inventory
+  - Modules
+  - Callbacks
+
+- Flexible and Powerful way to customize.
+
+- It can be on the format of:
+  - Inventory plugin
+  - Module plugin
+  - Action plugin
+  - Callback plugin
