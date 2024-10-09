@@ -317,5 +317,3 @@ node02
   - password
   - template
   - etc
-
-testing
