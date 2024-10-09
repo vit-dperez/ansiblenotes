@@ -124,6 +124,7 @@ nameserver 10.1.250.2
     - lineinfile:
         path: /etc/resolv.conf
         line: 'nameserver 10.1.250.10'
+        create: true/false # Create if the file is not created
 ```
 
 ## Ansible Plugins
@@ -146,3 +147,19 @@ nameserver 10.1.250.2
   - Module plugin
   - Action plugin
   - Callback plugin
+
+
+- command to get help with modules:
+
+```
+ansible-docs
+```
+
+- Create a custom module:
+
+```
+- name: Provision custom cloud resource
+  custom_cloud:
+    param1: value1
+    param2: value2
+```
