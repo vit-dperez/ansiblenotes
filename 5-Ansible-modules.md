@@ -152,7 +152,7 @@ nameserver 10.1.250.2
 - command to get help with modules:
 
 ```
-ansible-docs
+ansible-doc
 ```
 
 - Create a custom module:
